@@ -118,7 +118,7 @@ def write_results_to_file(results, file_path):
         f.write(f"Date and Time: {date_time}\n")
 
         for model_name, metrics in results.items():
-            f.write(f"\t{model_name} - RMSE: {metrics['RMSE']:.3f} - MAE: {metrics['MAE']:.3f}\n")
+            f.write(f"\t{model_name} - MR: {metrics['MR']:.2f} - MML: {metrics['MML']:.2f} - RMSE: {metrics['RMSE']:.3f} - MAE: {metrics['MAE']:.3f}\n")
 
 
 # 划分数据集
@@ -269,7 +269,7 @@ def compare_models(data, models, parameters, epochs=100, batch_size=32, missing_
         # 计算RMSE和MAE
         rmse, mae = calculate_errors(test_data, imputed_data, test_mask)
 
-        results[model_name] = {'RMSE': rmse, 'MAE': mae}
+        results[model_name] = {'MR': missing_rate, 'MML': max_missing_length, 'RMSE': rmse, 'MAE': mae}
 
     return results
 
