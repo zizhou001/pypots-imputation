@@ -37,13 +37,13 @@ def main():
     }
 
     # 加载数据
-    data = load_data(file_path='contrast_data.csv', columns=['windSpeed2m', 'windSpeed10m'])
+    data = load_data(file_path='wind_0001_1h_11k.csv', columns=['windSpeed2m', 'windSpeed10m'])
 
     # 比较模型
     results = compare_models(data, models, parameters, epochs=args.epochs, batch_size=args.batch_size, device=device,
                              missing_mode='continuous', missing_rate=args.missing_rate, n_features=2,
                              n_steps=args.seq_length, patience=1,
-                             max_missing_length=args.max_missing_rate * args.missing_rate * 1000)
+                             max_missing_length=args.max_missing_rate * args.missing_rate * 1160)
 
     # 打印结果
     for model_name, metrics in results.items():

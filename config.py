@@ -11,7 +11,7 @@ def get_configuration():
                         help='Set max_missing_rate.')
 
     args = parser.parse_args()
-    args.batch_size = 32
+    args.batch_size = 64
     args.epochs = 50
 
     return args
