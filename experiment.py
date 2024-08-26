@@ -80,9 +80,8 @@ def impute_data(model, dataloader, scaler):
 
 
 # 计算RMSE和MAE
-def calculate_errors(true_data, imputed_data, mask):
-    # print(imputed_data.shape, true_data.shape, mask.shape)
-
+def calculate_errors(true_data, imputed_data, mask, scaler):
+    # 确保 imputed_data 是正确的形状
     if imputed_data.shape[1] == 1:
         imputed_data = imputed_data.squeeze(1)
 
@@ -99,14 +98,20 @@ def calculate_errors(true_data, imputed_data, mask):
     true_data_cropped_np = true_data_cropped.to_numpy()
     mask_cropped_np = mask_cropped.cpu().numpy()
 
+    # 反归一化数据
+    # 需要确保 scaler 是适用于 true_data 和 imputed_data 的
+    true_data_cropped_np = scaler.inverse_transform(true_data_cropped_np)
+    selected_imputed_data_np = scaler.inverse_transform(selected_imputed_data_np)
+
     # 应用掩码
     masked_imputed_data = selected_imputed_data_np * mask_cropped_np
     masked_true_data = true_data_cropped_np * mask_cropped_np
 
+    # 计算误差
     mae = calc_mae(masked_true_data, masked_imputed_data)
-    rmse_value = calc_rmse(masked_true_data, masked_imputed_data)
+    rmse = calc_rmse(masked_true_data, masked_imputed_data)
 
-    return rmse_value, mae
+    return rmse, mae
 
 
 # 将结果输出到文件

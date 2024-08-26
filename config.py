@@ -6,8 +6,8 @@ def get_configuration():
 
     # 训练参数
     parser.add_argument('--seq-length', dest='seq_length', type=int, default=64, help='Specified sequence length.')
-    parser.add_argument('--missing-rate', dest='missing_rate', type=float, default=0.2, help='Set missing_rate.')
-    parser.add_argument('--max-missing-rate', dest='max_missing_rate', type=float, default=0.3,
+    parser.add_argument('--missing-rate', dest='missing_rate', type=float, default=0.8, help='Set missing_rate.')
+    parser.add_argument('--max-missing-rate', dest='max_missing_rate', type=float, default=0.25,
                         help='Set max_missing_rate.')
 
     args = parser.parse_args()
