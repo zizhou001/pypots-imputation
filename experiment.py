@@ -272,7 +272,7 @@ def compare_models(data, models, parameters, epochs=100, batch_size=32, missing_
         imputed_data = model.impute(test_dict)
 
         # 计算RMSE和MAE
-        rmse, mae = calculate_errors(test_data, imputed_data, test_mask)
+        rmse, mae = calculate_errors(test_data, imputed_data, test_mask, scaler=scaler)
 
         results[model_name] = {'MR': missing_rate, 'MML': max_missing_length, 'RMSE': rmse, 'MAE': mae}
 
